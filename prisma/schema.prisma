@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Tool {
+  id          String   @id @default(cuid())
+  name        String
+  url         String   @unique
+  category    String
+  tags        String   // Comma-separated tags for SQLite compatibility.
+  pricing     String
+  description String
+  affiliate   String?
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  views       Int      @default(0)
+}
